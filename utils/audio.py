@@ -29,7 +29,7 @@ def download_audio(url : str) -> str:
   return filename
 
 
-data = download_audio("https://www.youtube.com/watch?v=3GiS5xJoYRE")
+data = download_audio("https://www.youtube.com/watch?v=YWhWWW1XlbE")
 
 def convert_to_wav(input : str) -> str:
   output_path = os.path.splitext(input)[0] + "_converted.wav"
@@ -38,4 +38,19 @@ def convert_to_wav(input : str) -> str:
   audio.export(output_path, format="wav")
   return output_path
 
-print(convert_to_wav(data))
+wav_data = convert_to_wav(data)
+
+
+def audio_chunking(wav_path : str, chunk_minutes: int = 10) -> list:
+  audio = AudioSegment.from_wav(wav_path)
+  chunk_ms = chunk_minutes * 60 * 1000
+  
+  chunks = []
+  for i, start in enumerate(range(0, len(audio), chunk_ms)):
+    chunk = audio[start : start + chunk_ms]
+    chunk_path = f"{wav_path}_chunk_{i}.wav"
+    chunk.export(chunk_path, format="wav")
+    chunks.append(chunk_path)
+  return chunks
+
+print(audio_chunking(wav_data))
