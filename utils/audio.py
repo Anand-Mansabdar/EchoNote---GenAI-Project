@@ -54,3 +54,18 @@ def audio_chunking(wav_path : str, chunk_minutes: int = 10) -> list:
   return chunks
 
 print(audio_chunking(wav_data))
+
+
+# A Trigger Function that does the above tasks using only one function instead of 3 different functions
+def process_input(source: str) -> list:
+  if source.startswith("http://") or source.startswith("https://"):
+    print("Detected Youtube URL. Extracting Audio...")
+    wav_path = download_audio(source)
+  else:
+    print("Detected Local File... Converting to WAV...")
+    wav_path = convert_to_wav(source)
+    
+  print("Converting the audio to chunks...")
+  chunks = audio_chunking(wav_path=wav_path)
+  print(f"Audio Ready - {len(chunks)} chunk(s) detected")
+  return chunks
