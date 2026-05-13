@@ -44,8 +44,8 @@ if __name__ == "__main__":
   print(f"📌 Title: {result['title']}")
   print(f"\n📋 Summary:\n{result['summary']}")
   print(f"\n✅ Action Items:\n{result['action_items']}")
-  print(f"\n🔑 Key Decisions:\n{result['key_decisions']}")
-  print(f"\n❓ Open Questions:\n{result['open_questions']}")
+  print(f"\n🔑 Key Decisions:\n{result['decisions']}")
+  print(f"\n❓ Open Questions:\n{result['questions']}")
   print("=" * 60)
 
   # Phase 2 — Chat with your meeting via RAG

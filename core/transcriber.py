@@ -2,6 +2,9 @@ import os
 import whisper
 import requests as req
 from pydub import AudioSegment
+from dotenv import load_dotenv
+
+load_dotenv()
 
 whisper_model = os.getenv("WHISPER_MODEL", default="small")
 
